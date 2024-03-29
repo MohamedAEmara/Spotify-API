@@ -8,7 +8,13 @@ GET http://localhost:3000/songs/1
 
 ### Create new songs request
 POST http://localhost:3000/songs
-
+Content-Type: application/json
+{
+    "title": "RayeK",
+    "artists": ["Hamza Namira"],
+    "releaseDate": "2023-07-19",
+    "duration": "03:48"
+}
 
 ### Update songs request
 PUT http://localhost:3000/songs/1
