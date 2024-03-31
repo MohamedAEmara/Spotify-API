@@ -9,6 +9,7 @@ GET http://localhost:3000/songs/1
 ### Create new songs request
 POST http://localhost:3000/songs
 Content-Type: application/json
+
 {
     "title": "RayeK",
     "artists": ["Hamza Namira"],
