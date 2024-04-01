@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateSongDTO } from './dto/create-song-dto';
 
 @Injectable()
 export class SongsService {
@@ -7,14 +8,12 @@ export class SongsService {
 
   private readonly songs = [];
 
-  create(song) {
+  create(song: CreateSongDTO) {
     this.songs.push(song);
     return this.songs;
   }
 
   findAll() {
-    throw new Error(
-      'Error in DB while fetching the songs. Please try again later.',
-    );
+    return this.songs;
   }
 }
