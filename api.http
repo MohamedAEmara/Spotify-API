@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
     "title": "RayeK",
-    "artists": ["Hamza Namira"],
+    "artists": ["Hamza Namira", "Mohamed Emara"],
     "releaseDate": "2023-07-19",
     "duration": "03:48"
 }
@@ -23,3 +23,6 @@ PUT http://localhost:3000/songs/1
 
 ### Delete songs request 
 DELETE http://localhost:3000/songs/1
+
+### Get Hello
+GET http://localhost:3000/songs

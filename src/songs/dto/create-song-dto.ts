@@ -13,6 +13,7 @@ export class CreateSongDTO {
 
   @IsNotEmpty()
   @IsArray()
+  @IsString({ each: true }) // Validate each artist in the array is "String"
   readonly artists: string[];
 
   @IsNotEmpty()
