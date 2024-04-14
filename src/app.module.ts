@@ -10,12 +10,29 @@ import { SongsModule } from './songs/songs.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { SongsController } from './songs/songs.controller';
 import { DevConfigService } from './common/providers/DevConfigService';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Song } from './songs/song.entity';
+import { User } from './users/user.entity';
+import { Playlist } from './playlists/playlist.entity';
+import { Artist } from './artists/artist.entity';
 
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
 
 @Module({
-  imports: [SongsModule],
+  imports: [
+    SongsModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      database: 'spotify',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      entities: [Song, User, Playlist, Artist],
+      synchronize: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [
     AppService,
