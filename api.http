@@ -25,4 +25,16 @@ PUT http://localhost:3000/songs/1
 DELETE http://localhost:3000/songs/1
 
 ### Get Hello
-GET http://localhost:3000/songs
+GET http://localhost:8080/users
+
+
+
+### Create new playlist
+POST http://localhost:8080/playlists
+Content-Type: application/json
+
+{
+    "name": "Raye2",
+    "songs": [],
+    "user": 1    
+}

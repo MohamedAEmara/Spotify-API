@@ -15,20 +15,21 @@ import { Song } from './songs/song.entity';
 import { User } from './users/user.entity';
 import { Playlist } from './playlists/playlist.entity';
 import { Artist } from './artists/artist.entity';
+import { DataSource } from 'typeorm';
 
-const devConfig = { port: 3000 };
-const prodConfig = { port: 4000 };
+const devConfig = { port: 8080 };
+const prodConfig = { port: 8082 };
 
 @Module({
   imports: [
     SongsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      database: 'spotify',
+      database: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'root',
+      password: 'postgres',
       entities: [Song, User, Playlist, Artist],
       synchronize: true,
     }),
@@ -49,6 +50,10 @@ const prodConfig = { port: 4000 };
   ],
 })
 export class AppModule implements NestModule {
+  constructor(private dataSource: DataSource) {
+    console.log('Database.....');
+    console.log(dataSource.driver.database);
+  }
   configure(consumer: MiddlewareConsumer) {
     // 1- Apply middleware for all requests from route 'songs'
     consumer.apply(LoggerMiddleware).forRoutes('songs');
