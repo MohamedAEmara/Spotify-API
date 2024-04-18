@@ -2,9 +2,11 @@
 GET http://localhost:8080/songs
 
 
-### Find songs request
-GET http://localhost:8080/songs/6
+### Find all songs request
+GET http://localhost:8080/songs
 
+### Find the second page of songs & 12 songs per page.
+GET http://localhost:8080/songs/?page=2&limit=12
 
 ### Create new songs request
 POST http://localhost:8080/songs
