@@ -46,3 +46,14 @@ Content-Type: application/json
     "songs": [],
     "user": 1    
 }
+
+### Singup User:
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+    "firstName": "Mohamed",
+    "lastName": "Emara",
+    "email": "mohamedemara@gmail.com",
+    "password": "1234"
+}

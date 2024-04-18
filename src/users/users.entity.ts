@@ -13,11 +13,11 @@ export class User {
   @Column()
   lastName: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
-  @Exclude()
+  @Exclude() // Don't send password in Response.
   password: string;
 
   @OneToMany(() => Playlist, (playlist) => playlist.user)
