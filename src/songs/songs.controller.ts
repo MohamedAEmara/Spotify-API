@@ -15,6 +15,7 @@ import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { Connection } from 'src/common/constants/conneection';
 import { Song } from './song.entity';
+import { UpdateSongDTO } from './dto/update-song-dto';
 
 @Controller('songs')
 export class SongsController {
@@ -31,7 +32,7 @@ export class SongsController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Song[]> {
     try {
       return this.songsService.findAll();
     } catch (e) {
@@ -52,18 +53,31 @@ export class SongsController {
       new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
     )
     id: number,
-  ) {
+  ): Promise<Song> {
     console.log(typeof id);
-    return `fetch song based on id: ${id}`;
+    return this.songsService.findOne(id);
   }
 
   @Put(':id')
-  updateSong() {
-    return 'Update song by ID';
+  updateSong(
+    @Body() fieldsToUpdate: UpdateSongDTO,
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return this.songsService.update(id, fieldsToUpdate);
   }
 
   @Delete(':id')
-  deleteSong() {
-    return 'Delete song by ID';
+  deleteSong(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ): Promise<void> {
+    return this.songsService.delete(id);
   }
 }

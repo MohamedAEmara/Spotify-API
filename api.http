@@ -3,7 +3,7 @@ GET http://localhost:8080/songs
 
 
 ### Find songs request
-GET http://localhost:8080/songs/1
+GET http://localhost:8080/songs/6
 
 
 ### Create new songs request
@@ -14,15 +14,21 @@ Content-Type: application/json
     "title": "RayeK",
     "artists": ["Hamza Namira", "Mohamed Emara"],
     "releaseDate": "2023-07-19",
-    "duration": "03:48"
+    "duration": "03:48",
+    "lyrics": "no lyrics provided"
 }
 
 ### Update songs request
-PUT http://localhost:8080/songs/1
+PUT http://localhost:8080/songs/6
+Content-Type: application/json
+
+{
+    "lyrics": "This is an updated version of lyrics..."
+}
 
 
 ### Delete songs request 
-DELETE http://localhost:8080/songs/1
+DELETE http://localhost:8080/songs/3
 
 ### Get Hello
 GET http://localhost:8080/users
