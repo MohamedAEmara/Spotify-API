@@ -10,5 +10,5 @@ export class UserService {
     private userRepo: Repository<User>,
   ) {}
 
-  async get();
+  // async get();
 }

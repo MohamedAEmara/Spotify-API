@@ -14,6 +14,7 @@ import {
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { Connection } from 'src/common/constants/conneection';
+import { Song } from './song.entity';
 
 @Controller('songs')
 export class SongsController {
@@ -25,7 +26,7 @@ export class SongsController {
   }
 
   @Post()
-  createSong(@Body() createSongDTO: CreateSongDTO) {
+  createSong(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
 

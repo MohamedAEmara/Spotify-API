@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Artist } from 'src/artists/artist.entity';
 
 export class CreateSongDTO {
   @IsString()
@@ -15,7 +16,7 @@ export class CreateSongDTO {
   @IsNotEmpty()
   @IsArray()
   @IsString({ each: true }) // Validate each artist in the array is "String"
-  readonly artists: string[];
+  readonly artists: Artist[];
 
   @IsNotEmpty()
   @IsDateString()

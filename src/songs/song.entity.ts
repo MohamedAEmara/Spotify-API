@@ -23,7 +23,7 @@ export class Song {
   @Column('time')
   duration: Date;
 
-  @Column('text')
+  @Column({ nullable: true })
   lyrics: string;
 
   @ManyToMany(() => Artist, (artist) => artist.songs, { cascade: true })

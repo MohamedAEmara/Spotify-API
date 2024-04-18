@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
 import { connection } from 'src/common/constants/conneection';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Song } from './song.entity';
 // const mockSongsService = {
 //   findAll() {
 //     return [
@@ -18,6 +20,8 @@ import { connection } from 'src/common/constants/conneection';
 // };
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Song])],
+  // Now we can inject songRepository into songService
   controllers: [SongsController],
   providers: [
     SongsService,
