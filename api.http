@@ -57,3 +57,12 @@ Content-Type: application/json
     "email": "mohamedemara@gmail.com",
     "password": "1234"
 }
+
+### Login User:
+POST http://localhost:8080/auth/login 
+Content-Type: application/json
+
+{
+    "email": "mohamedemara@gmail.com",
+    "password": "12344"
+}
