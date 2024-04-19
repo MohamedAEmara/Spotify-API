@@ -2,10 +2,21 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
+import { JwtModule } from '@nestjs/jwt';
+import { authConstants } from './auth.constants';
+import { JwtStrategy } from './jwt-strategy';
 
 @Module({
-  imports: [UsersModule], // We have to import UserModule because we're using user controller inside auth controller
-  providers: [AuthService],
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: authConstants.secret,
+      signOptions: {
+        expiresIn: '30d',
+      },
+    }),
+  ],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService], // We can inject authService into appModule
 })

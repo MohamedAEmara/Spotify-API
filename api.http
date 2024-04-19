@@ -64,5 +64,15 @@ Content-Type: application/json
 
 {
     "email": "mohamedemara@gmail.com",
-    "password": "12344"
+    "password": "1234"
 }
+
+# Access Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlbWFyYUBnbWFpbC5jb20iLCJzdWIiOjcsImlhdCI6MTcxMzUxNjg1MCwiZXhwIjoxNzE2MTA4ODUwfQ.ucsX2-t7gbFNDT3wye2paeQAs5UFyTt_DgGtRcIqHa0
+
+### Profile      (UnAuthorized)
+GET http://localhost:8080/profile
+
+
+### Profile      (with Bearer access token)
+GET http://localhost:8080/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlbWFyYUBnbWFpbC5jb20iLCJzdWIiOjcsImlhdCI6MTcxMzUxNjg1MCwiZXhwIjoxNzE2MTA4ODUwfQ.ucsX2-t7gbFNDT3wye2paeQAs5UFyTt_DgGtRcIqHa0
