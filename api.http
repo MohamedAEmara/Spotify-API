@@ -63,7 +63,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "mohamedemara@gmail.com",
+    "email": "samiyusuf@gmail.com",
     "password": "1234"
 }
 
@@ -75,4 +75,17 @@ GET http://localhost:8080/profile
 
 ### Profile      (with Bearer access token)
 GET http://localhost:8080/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlbWFyYUBnbWFpbC5jb20iLCJzdWIiOjcsImlhdCI6MTcxMzUxNjg1MCwiZXhwIjoxNzE2MTA4ODUwfQ.ucsX2-t7gbFNDT3wye2paeQAs5UFyTt_DgGtRcIqHa0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5dXN1ZkBnbWFpbC5jb20iLCJ1c2VySWQiOjksImFydGlzdElkIjozLCJpYXQiOjE3MTM1NDExNzYsImV4cCI6MTcxNjEzMzE3Nn0.7r0oYPy6dcakEtYzxOn8XDOeGRGymGTYDx7YBaUuLbQ
+
+### Create new song
+POST http://localhost:8080/songs 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5dXN1ZkBnbWFpbC5jb20iLCJ1c2VySWQiOjksImFydGlzdElkIjozLCJpYXQiOjE3MTM1NDExNzYsImV4cCI6MTcxNjEzMzE3Nn0.7r0oYPy6dcakEtYzxOn8XDOeGRGymGTYDx7YBaUuLbQ
+Content-Type: application/json
+
+{
+    "title": "Worry Ends",
+    "artists": [3],
+    "releaseDate": "2010-08-21",
+    "duration": "03:44",
+    "lyrics": "UnAvailable"
+}

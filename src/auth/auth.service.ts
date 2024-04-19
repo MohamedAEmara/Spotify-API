@@ -3,12 +3,15 @@ import { UsersService } from 'src/users/users.service';
 import { LoginDTO } from './dto/login.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import { ArtistsService } from 'src/artists/artists.service';
+import { PayloadType } from './auth.types';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
+    private artistService: ArtistsService,
   ) {}
 
   async login(loginDTO: LoginDTO): Promise<{ accessToken: string }> {
@@ -22,7 +25,12 @@ export class AuthService {
     );
     if (mathcedPassword) {
       delete user.password;
-      const payload = { email: user.email, sub: user.id };
+      const payload: PayloadType = { email: user.email, userId: user.id };
+      // Find if it is an artist. then add the artist id to payload
+      const artist = await this.artistService.findArtist(user.id);
+      if (artist) {
+        payload.artistId = artist.id;
+      }
       return {
         accessToken: this.jwtService.sign(payload),
       };

@@ -18,6 +18,7 @@ import { Artist } from './artists/artist.entity';
 import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
 
 const devConfig = { port: 8080 };
 const prodConfig = { port: 8082 };
@@ -37,6 +38,7 @@ const prodConfig = { port: 8082 };
     }),
     AuthModule,
     UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [
