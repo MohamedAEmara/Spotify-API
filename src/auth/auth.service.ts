@@ -4,7 +4,8 @@ import { LoginDTO } from './dto/login.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { ArtistsService } from 'src/artists/artists.service';
-import { PayloadType } from './auth.types';
+import { Enable2FAType, PayloadType } from './auth.types';
+import * as speakeasy from 'speakeasy';
 
 @Injectable()
 export class AuthService {
@@ -37,5 +38,17 @@ export class AuthService {
     } else {
       throw new UnauthorizedException('Wrong email or password');
     }
+  }
+
+  async enable2FA(userId: number): Promise<Enable2FAType> {
+    const user = await this.userService.findById(userId);
+    if (user.enable2FA) {
+      return { secret: user.twoFASecret };
+    }
+    const secret = speakeasy.generateSecret();
+    console.log(secret);
+    user.twoFASecret = secret.base32;
+    await this.userService.updateSecretKey(user.id, user.twoFASecret);
+    return { secret: user.twoFASecret };
   }
 }
