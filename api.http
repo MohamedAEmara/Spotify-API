@@ -113,3 +113,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5d
 
 
 
+### Create new user
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+    "firstName": "Maher",
+    "lastName": "Zain",
+    "email": "maherzain@gmail.com",
+    "password": "1234"
+}
+
+# apiKey = ba3f0fb2-bc10-4089-9b05-5c4bb73d2094
+
+// Now we'll provide this apiKey to access profile route.
+
+### Access Profile Route with API Key
+GET http://localhost:8080/auth/profile
+Authorization: Bearer ba3f0fb2-bc10-4089-9b05-5c4bb73d2094

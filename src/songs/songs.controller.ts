@@ -61,9 +61,9 @@ export class SongsController {
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
-    page: number = 1,
+    page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
-    limit: number = 10,
+    limit = 10,
   ): Promise<Pagination<Song>> {
     limit = limit > 100 ? 100 : limit;
     return this.songsService.paginate({

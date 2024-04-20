@@ -9,6 +9,8 @@ export class AppService {
     private config: { port: string },
   ) {}
   getHello(): string {
-    return `Hellooooooooo from ${this.devConfigService.getDBHOST()} on port ${this.config.port}`;
+    return `Hellooooooooo from ${this.devConfigService.getDBHOST()} on port ${
+      this.config.port
+    }`;
   }
 }

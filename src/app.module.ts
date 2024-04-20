@@ -28,7 +28,7 @@ const prodConfig = { port: 8082 };
     SongsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      database: 'postgres',
+      database: 'spotify',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
