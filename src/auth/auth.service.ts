@@ -16,7 +16,11 @@ export class AuthService {
     private artistService: ArtistsService,
   ) {}
 
-  async login(loginDTO: LoginDTO): Promise<{ accessToken: string }> {
+  async login(
+    loginDTO: LoginDTO,
+  ): Promise<
+    { accessToken: string } | { validate2FA: string; message: string }
+  > {
     // 1- Get user by email
     const user = await this.userService.findOne(loginDTO);
 
@@ -32,6 +36,14 @@ export class AuthService {
       const artist = await this.artistService.findArtist(user.id);
       if (artist) {
         payload.artistId = artist.id;
+      }
+      // If validate2FA is enabled  =>  Send validateToken request link
+      // Otherwise                  =>  Send the jwt in response.
+      if (user.enable2FA && user.twoFASecret) {
+        return {
+          validate2FA: 'http://localhost:8080/auth/validate-2fa',
+          message: 'Please send the OTP from your Authenticator App!',
+        };
       }
       return {
         accessToken: this.jwtService.sign(payload),
