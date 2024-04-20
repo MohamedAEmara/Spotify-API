@@ -51,4 +51,26 @@ export class AuthService {
     await this.userService.updateSecretKey(user.id, user.twoFASecret);
     return { secret: user.twoFASecret };
   }
+
+  async validate2FAToken(
+    userId: number,
+    token: string,
+  ): Promise<{ verified: boolean }> {
+    try {
+      const user = await this.userService.findById(userId);
+      const verified = speakeasy.totp.verify({
+        secret: user.twoFASecret,
+        token,
+        encoding: 'base32',
+      });
+
+      if (verified) {
+        return { verified: true };
+      } else {
+        return { verified: false };
+      }
+    } catch (err) {
+      throw new UnauthorizedException('Error verifying token!');
+    }
+  }
 }
