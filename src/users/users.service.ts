@@ -45,4 +45,11 @@ export class UsersService {
   async findById(id: number) {
     return await this.userRepository.findOneBy({ id });
   }
+
+  async disable2FA(userId: number): Promise<UpdateResult> {
+    return this.userRepository.update(
+      { id: userId },
+      { enable2FA: false, twoFASecret: null },
+    );
+  }
 }
