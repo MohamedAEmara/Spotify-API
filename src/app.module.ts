@@ -20,6 +20,7 @@ import { typeOrmAsyncConfig } from 'db/data-source';
 import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
+import { validate } from 'env.validation';
 
 const devConfig = { port: 8080 };
 const prodConfig = { port: 8082 };
@@ -30,6 +31,7 @@ const prodConfig = { port: 8082 };
       envFilePath: ['.env.development', '.env.production'],
       isGlobal: true, // to be able to use env variables without importing it in every single module
       load: [configuration],
+      validate: validate,
     }),
     SongsModule,
     // TypeOrmModule.forRoot(dataSourceOptions),
