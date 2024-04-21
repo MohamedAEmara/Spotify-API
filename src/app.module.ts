@@ -19,6 +19,7 @@ import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
+import { dataSourceOptions } from 'db/data-source';
 
 const devConfig = { port: 8080 };
 const prodConfig = { port: 8082 };
@@ -26,16 +27,7 @@ const prodConfig = { port: 8082 };
 @Module({
   imports: [
     SongsModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      database: 'spotify',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      entities: [Song, User, Playlist, Artist],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
     UsersModule,
     ArtistsModule,

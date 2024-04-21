@@ -121,7 +121,8 @@ Content-Type: application/json
     "firstName": "Maher",
     "lastName": "Zain",
     "email": "maherzain@gmail.com",
-    "password": "1234"
+    "password": "1234",
+    "phone": "134234234"
 }
 
 # apiKey = ba3f0fb2-bc10-4089-9b05-5c4bb73d2094

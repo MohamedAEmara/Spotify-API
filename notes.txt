@@ -1,0 +1,6 @@
+To create a new migration:
+    $ npm run migration:generate -- db/migrations/<migration-file-name>
+
+To run migration:
+    $ npm run migration:run
+    

@@ -20,9 +20,6 @@ export class User {
   @Exclude() // Don't send password in Response.
   password: string;
 
-  @OneToMany(() => Playlist, (playlist) => playlist.user)
-  playlists: Playlist[];
-
   @Column({ nullable: true, type: 'text' })
   twoFASecret: string;
 
@@ -31,4 +28,7 @@ export class User {
 
   @Column()
   apiKey: string;
+
+  @OneToMany(() => Playlist, (playlist) => playlist.user)
+  playlists: Playlist[];
 }
