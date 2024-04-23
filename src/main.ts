@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SeedService } from './seed/seed.service';
 import { ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,8 +15,18 @@ async function bootstrap() {
     await seedService.seed();
   */
 
+  const config = new DocumentBuilder()
+    .setTitle('Spotify API')
+    .setDescription('Spotify Clone API with NestJS')
+    .setVersion('1.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   const configService = app.get(ConfigService);
   await app.listen(configService.get<number>('port'));
   // await app.listen(parseInt(process.env.PORT));
 }
+
 bootstrap();

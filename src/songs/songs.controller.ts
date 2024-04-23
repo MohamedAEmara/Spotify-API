@@ -16,10 +16,10 @@ import {
   Request,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
-import { CreateSongDTO } from './dto/create-song-dto';
+import { CreateSongDTO } from './dto/create-song.dto';
 import { Connection } from 'src/common/constants/conneection';
 import { Song } from './song.entity';
-import { UpdateSongDTO } from './dto/update-song-dto';
+import { UpdateSongDTO } from './dto/update-song.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { ArtistJwtGuard } from 'src/auth/artist-jwt-guard';
 

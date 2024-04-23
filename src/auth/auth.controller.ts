@@ -6,7 +6,7 @@ import {
   Request,
   Get,
 } from '@nestjs/common';
-import { CreateUserDTO } from 'src/users/dto/create-user-dto';
+import { CreateUserDTO } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/users.entity';
 import { UsersService } from 'src/users/users.service';
 import { AuthService } from './auth.service';
@@ -16,14 +16,21 @@ import { Enable2FAType } from './auth.types';
 import { ValidateTokenDTO } from './dto/validate-token.dto';
 import { UpdateResult } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
+@ApiTags('auth')
 export class AuthController {
   constructor(
     private userService: UsersService,
     private authService: AuthService,
   ) {}
   @Post('signup')
+  @ApiOperation({ summary: 'Register new user' })
+  @ApiResponse({
+    status: 201,
+    description: 'It will return the newly created user in response',
+  })
   signup(
     @Body()
     userDTO: CreateUserDTO,
