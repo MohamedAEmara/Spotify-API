@@ -58,6 +58,7 @@ export class AuthController {
 
   @Post('enable-2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   enable2FA(
     @Request()
     req,
@@ -68,6 +69,7 @@ export class AuthController {
 
   @Post('validate-2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   validate2FA(
     @Request()
     req,
@@ -82,6 +84,7 @@ export class AuthController {
 
   @Post('disable-2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   disable2FA(
     @Request()
     req,

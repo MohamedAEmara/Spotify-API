@@ -10,10 +10,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // Use seedService (Enable to create fake initial data)
-  // /*
+  /*
   const seedService = app.get(SeedService);
   await seedService.seed();
-  // */
+  */
 
   const config = new DocumentBuilder()
     .setTitle('Spotify API')
