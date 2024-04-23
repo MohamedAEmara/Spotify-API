@@ -3,4 +3,4 @@ To create a new migration:
 
 To run migration:
     $ npm run migration:run
-    
+        

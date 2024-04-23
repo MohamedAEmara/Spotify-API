@@ -10,15 +10,26 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // Use seedService (Enable to create fake initial data)
-  /*
-    const seedService = app.get(SeedService);
-    await seedService.seed();
-  */
+  // /*
+  const seedService = app.get(SeedService);
+  await seedService.seed();
+  // */
 
   const config = new DocumentBuilder()
     .setTitle('Spotify API')
     .setDescription('Spotify Clone API with NestJS')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

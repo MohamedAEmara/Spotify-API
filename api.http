@@ -63,7 +63,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "mohamedemara@gmail.com",
+    "email": "emara@gmail.com",
     "password": "1234"
 }
 
@@ -75,8 +75,8 @@ GET http://localhost:8080/profile
 
 ### Profile      (with Bearer access token)
 GET http://localhost:8080/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5dXN1ZkBnbWFpbC5jb20iLCJ1c2VySWQiOjksImFydGlzdElkIjozLCJpYXQiOjE3MTM1NDExNzYsImV4cCI6MTcxNjEzMzE3Nn0.7r0oYPy6dcakEtYzxOn8XDOeGRGymGTYDx7YBaUuLbQ
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYXJhQGdtYWlsLmNvbSIsInVzZXJJZCI6NCwiaWF0IjoxNzEzODg4NzAzLCJleHAiOjE3MTY0ODA3MDN9.hFuM_41peivIP2vN_sBjlZKPj2a1pAoCKkc13pwo6PM
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5dXN1ZkBnbWFpbC5jb20iLCJ1c2VySWQiOjksImFydGlzdElkIjozLCJpYXQiOjE3MTM1NDExNzYsImV4cCI6MTcxNjEzMzE3Nn0.7r0oYPy6dcakEtYzxOn8XDOeGRGymGTYDx7YBaUuLbQ
 ### Create new song
 POST http://localhost:8080/songs 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbWl5dXN1ZkBnbWFpbC5jb20iLCJ1c2VySWQiOjksImFydGlzdElkIjozLCJpYXQiOjE3MTM1NDExNzYsImV4cCI6MTcxNjEzMzE3Nn0.7r0oYPy6dcakEtYzxOn8XDOeGRGymGTYDx7YBaUuLbQ
