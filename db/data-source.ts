@@ -8,6 +8,7 @@ import { Playlist } from 'src/playlists/playlist.entity';
 import { Song } from 'src/songs/song.entity';
 import { User } from 'src/users/users.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import 'dotenv/config';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
