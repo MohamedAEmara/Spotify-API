@@ -33,7 +33,7 @@ Content-Type: application/json
 DELETE http://localhost:8080/songs/3
 
 ### Get Hello
-GET http://localhost:8080/users
+GET http://localhost:8080/
 
 
 

@@ -28,7 +28,7 @@ const prodConfig = { port: 8082 };
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env.development', '.env.production'],
+      envFilePath: [`${process.cwd()}/.env.${process.env.NODE_ENV}`],
       isGlobal: true, // to be able to use env variables without importing it in every single module
       load: [configuration],
       validate: validate,
@@ -56,21 +56,4 @@ const prodConfig = { port: 8082 };
     },
   ],
 })
-export class AppModule implements NestModule {
-  constructor(private dataSource: DataSource) {
-    console.log('Database.....');
-    console.log(dataSource.driver.database);
-  }
-  configure(consumer: MiddlewareConsumer) {
-    // 1- Apply middleware for all requests from route 'songs'
-    consumer.apply(LoggerMiddleware).forRoutes('songs');
-
-    // 2- Apply middleware for POST requests from route 'songs'
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes({ path: 'songs', method: RequestMethod.POST });
-
-    // 3- Apply middleware for request from a controller file:
-    consumer.apply(LoggerMiddleware).forRoutes(SongsController);
-  }
-}
+export class AppModule {}

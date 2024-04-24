@@ -9,7 +9,8 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    const node_nev = `${process.cwd()}/.env.${process.env.NODE_ENV}`;
+    return `Hello from ${node_nev}`;
   }
 
   @Get('profile')
