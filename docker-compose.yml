@@ -8,8 +8,9 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: spotify-api
     volumes:
-      - /private/var/lib/postgresql/spotify:/var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  
+volumes:
+  pgdata:
