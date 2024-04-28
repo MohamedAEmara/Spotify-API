@@ -14,6 +14,12 @@ import {
   Query,
   UseGuards,
   Request,
+  UseInterceptors,
+  UploadedFile,
+  UsePipes,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song.dto';
@@ -22,7 +28,10 @@ import { Song } from './song.entity';
 import { UpdateSongDTO } from './dto/update-song.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { ArtistJwtGuard } from 'src/auth/artist-jwt-guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileUploadDto } from './dto/file-upload.dto';
+import { FileSizeValidationPipe } from './pipes/file-size-validation.pipe';
 
 @Controller('songs')
 export class SongsController {
@@ -107,5 +116,23 @@ export class SongsController {
     id: number,
   ): Promise<void> {
     return this.songsService.delete(id);
+  }
+
+  @Post('upload')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiBody({
+    description: 'file upload',
+    type: FileUploadDto,
+  })
+  uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new FileTypeValidator({ fileType: 'audio' })],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    console.log(file);
   }
 }

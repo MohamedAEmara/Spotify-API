@@ -30,4 +30,7 @@ export class CreateSongDTO {
   @IsString()
   @IsOptional()
   readonly lyrics: string;
+
+  @IsString()
+  track: string;
 }
