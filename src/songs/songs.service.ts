@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSongDTO } from './dto/create-song.dto';
 import { Repository, UpdateResult } from 'typeorm';
 import { Song } from './song.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +9,7 @@ import {
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
 import { Artist } from 'src/artists/artist.entity';
+import { CreateSongWithFileDTO } from './dto/create-song-with-file.dto';
 
 @Injectable()
 export class SongsService {
@@ -19,16 +19,28 @@ export class SongsService {
     @InjectRepository(Artist)
     private artistRepository: Repository<Artist>,
   ) {}
-  async create(songDTO: CreateSongDTO): Promise<Song> {
+  async create(
+    songDTO: Pick<
+      CreateSongWithFileDTO,
+      'lyrics' | 'releasedDate' | 'title' | 'artists'
+    >,
+    filePath: string,
+    duration: number,
+  ): Promise<Song> {
     const song = new Song();
     song.title = songDTO.title;
-    song.artists = songDTO.artists;
-    song.duration = songDTO.duration;
     song.lyrics = songDTO.lyrics;
-    song.releasedDate = songDTO.releaseDate;
+    song.releasedDate = songDTO.releasedDate;
+    song.track = `./${filePath}.mp3`;
+    song.duration = duration;
 
     // Find all the artists based on IDs
-    const artists = await this.artistRepository.findByIds(songDTO.artists);
+    const str = songDTO.artists.toString();
+    const arr = str.split(',');
+    const ids = arr.map((el) => Number(el));
+
+    const artists = await this.artistRepository.findByIds(ids);
+
     // Set the relation with artist and songs
     song.artists = artists;
     // Finally, we can call save() method from songsRepository

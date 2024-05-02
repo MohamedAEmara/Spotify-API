@@ -20,8 +20,8 @@ export class Song {
   @Column('date')
   releasedDate: Date;
 
-  @Column('time')
-  duration: Date;
+  @Column()
+  duration: number;
 
   @Column({ nullable: true })
   lyrics: string;

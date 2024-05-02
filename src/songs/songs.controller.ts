@@ -4,7 +4,6 @@ import {
   DefaultValuePipe,
   Delete,
   Get,
-  // HttpException,
   HttpStatus,
   Inject,
   Param,
@@ -16,13 +15,10 @@ import {
   Request,
   UseInterceptors,
   UploadedFile,
-  UsePipes,
   ParseFilePipe,
-  MaxFileSizeValidator,
   FileTypeValidator,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
-import { CreateSongDTO } from './dto/create-song.dto';
 import { Connection } from 'src/common/constants/conneection';
 import { Song } from './song.entity';
 import { UpdateSongDTO } from './dto/update-song.dto';
@@ -30,13 +26,16 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { ArtistJwtGuard } from 'src/auth/artist-jwt-guard';
 import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FileUploadDto } from './dto/file-upload.dto';
-import { FileSizeValidationPipe } from './pipes/file-size-validation.pipe';
+import { CreateSongWithFileDTO } from './dto/create-song-with-file.dto';
+import { AudioService } from '../common/providers/audio.service';
+import { FileService } from '../common/providers/file.service';
 
 @Controller('songs')
 export class SongsController {
   constructor(
     private songsService: SongsService,
+    private audioService: AudioService,
+    private fileService: FileService,
     @Inject('CONNECTION') private connection: Connection,
   ) {
     console.log(`Connection String: ${this.connection.CONNECTION_STRING}`);
@@ -45,13 +44,41 @@ export class SongsController {
   @Post()
   @UseGuards(ArtistJwtGuard)
   @ApiBearerAuth('JWT-auth')
-  createSong(
-    @Body() createSongDTO: CreateSongDTO,
-    @Request()
-    req,
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'track file',
+    type: CreateSongWithFileDTO,
+  })
+  async createSong(
+    @Body()
+    createSongDTO: Pick<
+      CreateSongWithFileDTO,
+      'lyrics' | 'releasedDate' | 'title' | 'artists'
+    >,
+    @UploadedFile() file: Express.Multer.File,
+    @Request() req,
   ): Promise<Song> {
-    console.log('requested user: ' + req.user);
-    return this.songsService.create(createSongDTO);
+    console.log('file');
+    console.log(file);
+
+    console.log(createSongDTO.artists);
+    console.log(typeof createSongDTO.artists);
+    console.log(createSongDTO.artists.length);
+
+    let duration = 0;
+    if (file.path) {
+      duration = await this.audioService.getDuration(file.path);
+      duration = Math.floor(duration);
+      await this.fileService.renameFile(`./${file.path}`, `./${file.path}.mp3`);
+    }
+    console.log('duration of the file = ' + duration);
+    const createdSong = await this.songsService.create(
+      createSongDTO,
+      file ? file.path : null,
+      duration,
+    );
+    return createdSong;
   }
 
   // @Get()
@@ -122,8 +149,8 @@ export class SongsController {
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
   @ApiBody({
-    description: 'file upload',
-    type: FileUploadDto,
+    description: 'create new song',
+    type: CreateSongWithFileDTO,
   })
   uploadFile(
     @UploadedFile(

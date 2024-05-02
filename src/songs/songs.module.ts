@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Song } from './song.entity';
 import { Artist } from 'src/artists/artist.entity';
 import { MulterModule } from '@nestjs/platform-express';
+import { AudioService } from '../common/providers/audio.service';
+import { FileService } from '../common/providers/file.service';
 // const mockSongsService = {
 //   findAll() {
 //     return [
@@ -34,10 +36,8 @@ import { MulterModule } from '@nestjs/platform-express';
   controllers: [SongsController],
   providers: [
     SongsService,
-    // {
-    //   provide: SongsService,
-    //   useValue: mockSongsService    // Constant value for (SongsService)
-    // }
+    AudioService,
+    FileService,
     {
       provide: 'CONNECTION',
       useValue: connection,

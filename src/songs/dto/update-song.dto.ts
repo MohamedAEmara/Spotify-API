@@ -1,7 +1,6 @@
 import {
   IsArray,
   IsDateString,
-  IsMilitaryTime,
   IsNumber,
   IsOptional,
   IsString,
@@ -14,18 +13,24 @@ export class UpdateSongDTO {
 
   @IsOptional()
   @IsArray()
-  @IsNumber({}, { each: true })
+  // @isString({}, { each: true })
+  @IsString()
   readonly artists;
 
   @IsDateString()
   @IsOptional()
   readonly releasedDate: Date;
 
-  @IsMilitaryTime()
+  // @IsMilitaryTime()
+  @IsNumber()
   @IsOptional()
-  readonly duration: Date;
+  readonly duration: number;
 
   @IsString()
   @IsOptional()
   readonly lyrics: string;
+
+  @IsString()
+  @IsOptional()
+  readonly track: string;
 }
