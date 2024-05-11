@@ -67,7 +67,7 @@ export class AuthService {
   async validate2FAToken(
     userId: number,
     token: string,
-  ): Promise<{ verified: boolean }> {
+  ): Promise<{ accessToken: string; verified: boolean }> {
     try {
       const user = await this.userService.findById(userId);
       const verified = speakeasy.totp.verify({
@@ -77,9 +77,16 @@ export class AuthService {
       });
 
       if (verified) {
-        return { verified: true };
+        // update payload to make validate2FA true
+        const payload: PayloadType = {
+          email: user.email,
+          userId: user.id,
+          validate2FA: true,
+        };
+
+        return { accessToken: this.jwtService.sign(payload), verified: true };
       } else {
-        return { verified: false };
+        return { accessToken: '', verified: false };
       }
     } catch (err) {
       throw new UnauthorizedException('Error verifying token!');
