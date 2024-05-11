@@ -40,11 +40,9 @@ export class AuthService {
       }
       // If validate2FA is enabled  =>  Send validateToken request link
       // Otherwise                  =>  Send the jwt in response.
+      payload.validate2FA = true;
       if (user.enable2FA && user.twoFASecret) {
-        return {
-          validate2FA: 'http://localhost:8080/auth/validate-2fa',
-          message: 'Please send the OTP from your Authenticator App!',
-        };
+        payload.validate2FA = false;
       }
       return {
         accessToken: this.jwtService.sign(payload),

@@ -12,7 +12,6 @@ import {
   Put,
   Query,
   UseGuards,
-  Request,
   UseInterceptors,
   UploadedFile,
   ParseFilePipe,
@@ -23,12 +22,12 @@ import { Connection } from 'src/common/constants/conneection';
 import { Song } from './song.entity';
 import { UpdateSongDTO } from './dto/update-song.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
-import { ArtistJwtGuard } from 'src/auth/artist-jwt-guard';
 import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateSongWithFileDTO } from './dto/create-song-with-file.dto';
 import { AudioService } from '../common/providers/audio.service';
 import { FileService } from '../common/providers/file.service';
+import { JwtAuthGuard } from 'src/auth/jwt-guard';
 
 @Controller('songs')
 export class SongsController {
@@ -42,7 +41,7 @@ export class SongsController {
   }
 
   @Post()
-  @UseGuards(ArtistJwtGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
@@ -57,7 +56,6 @@ export class SongsController {
       'lyrics' | 'releasedDate' | 'title' | 'artists'
     >,
     @UploadedFile() file: Express.Multer.File,
-    @Request() req,
   ): Promise<Song> {
     console.log('file');
     console.log(file);
