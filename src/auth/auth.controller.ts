@@ -15,7 +15,6 @@ import { JwtAuthGuard } from './jwt-guard';
 import { Enable2FAType } from './auth.types';
 import { ValidateTokenDTO } from './dto/validate-token.dto';
 import { UpdateResult } from 'typeorm';
-import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -75,7 +74,7 @@ export class AuthController {
     req,
     @Body()
     validateTokenDTO: ValidateTokenDTO,
-  ): Promise<{ verified: boolean }> {
+  ): Promise<{ accessToken: string; verified: boolean }> {
     return this.authService.validate2FAToken(
       req.user.userId,
       validateTokenDTO.token,
@@ -93,7 +92,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @UseGuards(AuthGuard('bearer'))
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
   getProfile(
     @Request()
