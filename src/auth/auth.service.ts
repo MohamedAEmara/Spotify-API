@@ -40,9 +40,8 @@ export class AuthService {
       }
       // If validate2FA is enabled  =>  Send validateToken request link
       // Otherwise                  =>  Send the jwt in response.
-      payload.validate2FA = true;
       if (user.enable2FA && user.twoFASecret) {
-        payload.validate2FA = false;
+        payload.enable2FA = true;
       }
       return {
         accessToken: this.jwtService.sign(payload),

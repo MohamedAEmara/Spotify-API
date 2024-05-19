@@ -12,11 +12,9 @@ import { UsersService } from 'src/users/users.service';
 import { AuthService } from './auth.service';
 import { LoginDTO } from './dto/login.dto';
 import { JwtAuthGuard } from './jwt-guard';
-import { JwtAuthGuard2 } from './jwt.guard.before2FactorValidation';
 import { Enable2FAType } from './auth.types';
 import { ValidateTokenDTO } from './dto/validate-token.dto';
 import { UpdateResult } from 'typeorm';
-import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -69,7 +67,7 @@ export class AuthController {
   }
 
   @Post('validate-2fa')
-  @UseGuards(JwtAuthGuard2)
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
   validate2FA(
     @Request()
@@ -94,7 +92,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @UseGuards(AuthGuard('bearer'))
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
   getProfile(
     @Request()

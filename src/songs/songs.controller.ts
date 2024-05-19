@@ -27,7 +27,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateSongWithFileDTO } from './dto/create-song-with-file.dto';
 import { AudioService } from '../common/providers/audio.service';
 import { FileService } from '../common/providers/file.service';
-import { JwtAuthGuard } from 'src/auth/jwt-guard';
+import { JwtAuthGuard } from './../auth/jwt-guard';
 
 @Controller('songs')
 export class SongsController {
@@ -95,6 +95,7 @@ export class SongsController {
   // }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page = 1,
