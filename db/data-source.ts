@@ -3,10 +3,10 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { Artist } from 'src/artists/artist.entity';
-import { Playlist } from 'src/playlists/playlist.entity';
-import { Song } from 'src/songs/song.entity';
-import { User } from 'src/users/users.entity';
+import { Artist } from '../src/artists/artist.entity';
+import { Playlist } from '../src/playlists/playlist.entity';
+import { Song } from '../src/songs/song.entity';
+import { User } from '../src/users/users.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import 'dotenv/config';
 

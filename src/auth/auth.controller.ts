@@ -6,9 +6,9 @@ import {
   Request,
   Get,
 } from '@nestjs/common';
-import { CreateUserDTO } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/users.entity';
-import { UsersService } from 'src/users/users.service';
+import { CreateUserDTO } from '../../src/users/dto/create-user.dto';
+import { User } from '../../src/users/users.entity';
+import { UsersService } from '../../src/users/users.service';
 import { AuthService } from './auth.service';
 import { LoginDTO } from './dto/login.dto';
 import { JwtAuthGuard } from './jwt-guard';

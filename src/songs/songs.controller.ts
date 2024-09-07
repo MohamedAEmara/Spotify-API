@@ -18,7 +18,7 @@ import {
   FileTypeValidator,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
-import { Connection } from 'src/common/constants/conneection';
+import { Connection } from '../../src/common/constants/conneection';
 import { Song } from './song.entity';
 import { UpdateSongDTO } from './dto/update-song.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';

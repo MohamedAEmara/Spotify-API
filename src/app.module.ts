@@ -8,11 +8,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
-import { typeOrmAsyncConfig } from 'db/data-source';
+import { typeOrmAsyncConfig } from '../db/data-source';
 import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
-import { validate } from 'env.validation';
+import { validate } from '../env.validation';
 
 const devConfig = { port: 8080 };
 const prodConfig = { port: 8082 };

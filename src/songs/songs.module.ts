@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
-import { connection } from 'src/common/constants/conneection';
+import { connection } from '../../src/common/constants/conneection';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Song } from './song.entity';
-import { Artist } from 'src/artists/artist.entity';
+import { Artist } from '../../src/artists/artist.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { AudioService } from '../common/providers/audio.service';
 import { FileService } from '../common/providers/file.service';

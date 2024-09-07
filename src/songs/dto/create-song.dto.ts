@@ -7,7 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { Artist } from 'src/artists/artist.entity';
+import { Artist } from '../../../src/artists/artist.entity';
 
 export class CreateSongDTO {
   @IsString()

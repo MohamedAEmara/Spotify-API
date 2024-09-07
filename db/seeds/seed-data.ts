@@ -1,5 +1,5 @@
-import { Artist } from 'src/artists/artist.entity';
-import { User } from 'src/users/users.entity';
+import { Artist } from '../../src/artists/artist.entity';
+import { User } from '../../src/users/users.entity';
 import { EntityManager } from 'typeorm';
 import { faker } from '@faker-js/faker';
 import { v4 as uuid4 } from 'uuid';

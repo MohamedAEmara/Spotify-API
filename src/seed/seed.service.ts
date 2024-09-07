@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { seedData } from 'db/seeds/seed-data';
+import { seedData } from '../../db/seeds/seed-data';
 
 @Injectable()
 export class SeedService {

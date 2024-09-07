@@ -4,7 +4,7 @@ import { User } from './users.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { CreateUserDTO } from './dto/create-user.dto';
 import * as bcrypt from 'bcryptjs';
-import { LoginDTO } from 'src/auth/dto/login.dto';
+import { LoginDTO } from '../../src/auth/dto/login.dto';
 import { v4 as uuid4 } from 'uuid';
 
 @Injectable()
