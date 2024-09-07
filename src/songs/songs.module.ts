@@ -25,11 +25,11 @@ import { FileService } from '../common/providers/file.service';
 
 @Module({
   imports: [
-    MulterModule.registerAsync({
-      useFactory: () => ({
-        dest: './uploads',
-      }),
-    }),
+    // MulterModule.registerAsync({
+    //   useFactory: () => ({
+    //     dest: './uploads',
+    //   }),
+    // }),
     TypeOrmModule.forFeature([Song, Artist]),
   ], // Now we can use artistRepository into songService
   // Now we can inject songRepository into songService
