@@ -12,12 +12,7 @@ import 'dotenv/config';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  // entities: ['dist/**/*.entity.js'],
+  url: process.env.DATABASE_URL,
   entities: [User, Song, Playlist, Artist],
   synchronize: false,
   migrations: ['dist/db/migrations/*.js'],
@@ -31,11 +26,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   ): Promise<TypeOrmModuleOptions> => {
     const test = {
       type: 'postgres',
-      host: configService.get<string>('dbHost'),
-      port: configService.get<number>('dbPort'),
-      username: configService.get<string>('dbUsername'),
-      database: configService.get<string>('dbName'),
-      password: configService.get<string>('dbPassword'),
+      url: process.env.DATABASE_URL,
       // entities: ['dist/**/*.entity.js'],
       entities: [User, Song, Playlist, Artist],
       synchronize: true,
@@ -44,14 +35,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     console.log(test);
     return {
       type: 'postgres',
-      host: configService.get<string>('dbHost'),
-      port: configService.get<number>('dbPort'),
-      username: configService.get<string>('dbUsername'),
-      database: configService.get<string>('dbName'),
-      password: configService.get<string>('dbPassword'),
-      entities: ['dist/**/*.entity.js'],
-      synchronize: true,
-      migrations: ['dist/db/migrations/*.js'],
+      url: process.env.DATABASE_URL,
     };
   },
 };
